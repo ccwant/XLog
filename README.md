@@ -13,7 +13,7 @@ Android专业版Log日志打印收集项目，他可以使你的开发变得更�
 
 ### 缓存效果
 
-![image](https://github.com/CCwant/XLog/blob/master/doc/boot1.png)
+![image](https://github.com/CCwant/XLog/blob/master/doc/boot2.png)
 
 ### 使用前，你需要添加以下权限
 ``` java
