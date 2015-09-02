@@ -7,6 +7,12 @@ Android专业版Log日志打印收集项目，他可以使你的开发变得更�
 
 ## 简介
 
+### Logcat效果
+
+![image](https://github.com/CCwant/XLog/blob/master/doc/boot1.png)
+
+### 缓存效果
+
 ![image](https://github.com/CCwant/XLog/blob/master/doc/boot1.png)
 
 ### 使用前，你需要添加以下权限
@@ -27,12 +33,12 @@ Android专业版Log日志打印收集项目，他可以使你的开发变得更�
 ```
 
 ``` java
-XLog.makeLog().v("this is verbose");
+		XLog.makeLog().v("this is verbose");
 		XLog.makeLog().d("this is debug");
 		XLog.makeLog().e("this is error");
 		XLog.makeLog().i("this is info");
 		XLog.makeLog().w("this is warn");
-		
+
 		XLog.makeLog(TAG).i("this is info");
 ```
 
