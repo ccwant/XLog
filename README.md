@@ -26,6 +26,31 @@ Android专业版Log日志打印收集项目，他可以使你的开发变得更�
 
 ![image](https://github.com/CCwant/XLog/blob/master/doc/boot4.png)
 
+### 版本更新信息
+``` java
+版本：1.0
+文件：xlog1.0.jar
+更新内容：
+	1.基本日志打印
+	2.缓存日志到指定目录
+	3.缓存优化，性能优化
+
+版本：1.1
+文件：xlog1.1.jar
+更新内容：
+	1.崩溃日志打印与缓存
+	2.代码优化，性能提高
+	
+版本：1.2
+文件：xlog1.2.jar
+更新内容：
+	1.崩溃信息打印优化
+	2.崩溃异常处理
+	3.电子邮箱服务
+	4.代码逻辑优化
+	5.性能提升30%
+```
+
 ### 使用前，你需要添加以下权限
 ``` java
 <uses-permission android:name="android.permission.INTERNET" />
