@@ -16,14 +16,28 @@ Android专业版Log日志打印收集项目，他可以使你的开发变得更�
 
 ![image](https://github.com/CCwant/XLog/blob/master/doc/boot2.png)
 
-### 崩溃日志效果
+### 崩溃日志打印效果
 
 ![image](https://github.com/CCwant/XLog/blob/master/doc/boot3.png)
 
+### Android程序崩溃运行效果
+
+![image](https://github.com/CCwant/XLog/blob/master/doc/boot4.png)
+
 ### 使用前，你需要添加以下权限
 ``` java
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
+
+### 除此之外，你还需要导入以下Jar包(提供邮件服务)
+``` java
+activation.jar
+additionnal.jar
+mail.jar
+```
+
 ### 示例
 ``` java
 
@@ -31,6 +45,7 @@ public class MyApplication extends Application implements XLogCrashHandleListene
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
 		XLogConfiguration configuration=new XLogConfiguration();
 		//设置是否缓存
 		configuration.setCache(true);
@@ -40,13 +55,42 @@ public class MyApplication extends Application implements XLogCrashHandleListene
 		configuration.setDebug(true);
 		//设置缓存目录名，所有日志都在sd卡目录下
 		configuration.setCacheDir("MyLog");
+		
+		// 设置是否开启调试电子邮件
+		builder.setMailDebug(true);
+		// 设置电子邮件SMTP 主机
+		builder.setMailSmtp("smtp.126.com");
+		// 设置电子邮件的用户
+		builder.setMailUser("xx@126.com");
+		// 设置电子邮件的用户密码
+		builder.setMailPassword("xxxxxxx");
+		// 设置电子邮件的发件人
+		builder.setMailFrom("xx@126.com");
+		// 设置电子邮件的收件人
+		builder.setMailTo("xx@xxx.com");
+		// 设置电子邮件的抄送人
+		builder.setMailCopyto("xx@xxx.com");
+		
 		//初始化Xlog，只需要在程序开始运行时初始化
 		XLog.makeLog().init(configuration,this);
 	}
 	@Override
-	public void crashHandle() {
+	public void crashHandle(String filePath) {
+		final String path = filePath;
 		//程序崩溃时的处理
 		Toast.makeText(getApplicationContext(), "很抱歉,程序出现异常,即将退出...", Toast.LENGTH_LONG).show();  
+		//一般Xlog只在程序发生异常崩溃时才发送邮件信息
+		if (path != null) {//判断path是否为空
+			File file = new File(path);
+			if (file.exists() && file.isFile()) {
+				boolean sendResult=XLog.makeLog().sendToMail("Android日志","很抱歉,程序出现异常,即将退出...", file);
+				if(sendResult){
+					Toast.makeText(getApplicationContext(), "发送成功！",Toast.LENGTH_LONG).show();
+				}else{
+					Toast.makeText(getApplicationContext(), "发送失败！",Toast.LENGTH_LONG).show();
+				}
+			}
+		}
 	}
 }
 ```
